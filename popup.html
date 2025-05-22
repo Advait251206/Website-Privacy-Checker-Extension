@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Trust Extension</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- ... (dt-header, siteInfo, dt-score-display-area, actionableAdviceBox as before) ... -->
+  <div class="dt-header">
+    <div class="dt-header-main">
+        <img id="extensionIcon" src="icons/icon48.png" alt="Digital Trust Icon">
+        <h2>Digital Trust</h2>
+    </div>
+  </div>
+  <div id="siteInfo" class="dt-site-url-bar">Loading site info...</div>
+
+  <div class="dt-score-display-area">
+    <div class="dt-score-container">
+        <div class="dt-privacy-score">
+            <span class="score-label">Privacy Score: </span>
+            <span id="privacyScoreValue" class="score-value">--</span><span class="score-max">/100</span>
+        </div>
+        <div class="remark-container">
+            <span class="remark-label">Remark for this website:</span>
+            <div id="privacyScoreRemark" class="dt-score-remark">Analyzing...</div>
+        </div>
+    </div>
+  </div>
+
+  <div id="actionableAdviceBox" class="dt-actionable-advice" style="display: none;">
+      <h4>How to improve this score (or notes):</h4>
+      <ul id="adviceList"></ul>
+      <p id="maxScoreReached" style="display: none;">Max score for this website reached based on current analysis.</p>
+  </div>
+
+  <div class="dt-content-area">
+    <div id="loadingMessage" class="dt-loading-message">Inspecting page... 🧐</div>
+    <div id="errorMessage" class="dt-error-message" style="display:none;"></div>
+
+    <div id="mainContent" style="display:none;">
+
+        <div class="dt-section collapsed" id="permissionsSection">
+            <div class="dt-section-header">
+                <h3><span class="dt-item-icon">🛡️</span> Site Permissions</h3>
+                <span class="count" id="permissionOverallCount">?</span>
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="dt-section-content">
+                <p class="dt-explanation" style="display:none;">Access this site has to sensitive features. Manage these in your browser's site settings.</p>
+                <div class="dt-tabs">
+                    <button class="dt-tab-button active" data-tab="allowed">Allowed (<span id="permAllowedCount">0</span>)</button>
+                    <button class="dt-tab-button" data-tab="ask">Ask (<span id="permAskCount">0</span>)</button>
+                    <button class="dt-tab-button" data-tab="blocked">Blocked (<span id="permBlockedCount">0</span>)</button>
+                </div>
+                <div id="allowed" class="dt-tab-content active">
+                    <ul id="permissionListAllowed"></ul>
+                    <div class="dt-empty-message tab-empty" style="display:none;">No permissions explicitly allowed.</div>
+                </div>
+                <div id="ask" class="dt-tab-content">
+                    <ul id="permissionListAsk"></ul>
+                    <div class="dt-empty-message tab-empty" style="display:none;">No permissions are set to "ask" (default).</div>
+                </div>
+                <div id="blocked" class="dt-tab-content">
+                    <ul id="permissionListBlocked"></ul>
+                    <div class="dt-empty-message tab-empty" style="display:none;">No permissions explicitly blocked. Other unlisted permissions are typically denied by default.</div>
+                </div>
+                <div class="dt-empty-message main-perm-empty" id="permissionsUnavailableMsg" style="display:none;">Permission information could not be loaded or is not applicable.</div>
+            </div>
+        </div>
+
+        <div class="dt-section collapsed" id="cookiesSection">
+            <div class="dt-section-header">
+                <h3><span class="dt-item-icon">🍪</span> Cookies</h3>
+                <span class="count" id="cookieCount">0</span>
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="dt-section-content">
+                <p class="dt-explanation" style="display:none;">Small files sites store on your computer to remember you or your preferences. Third-party cookies can track you across sites.</p>
+                <ul id="cookieList"></ul>
+                <div class="dt-empty-message" style="display:none;">No cookies found for this page.</div>
+            </div>
+        </div>
+
+        <!-- Trackers & External Connections Section - NOW TABBED -->
+        <div class="dt-section collapsed" id="connectionsSection">
+            <div class="dt-section-header">
+                <h3><span class="dt-item-icon">🌐</span> Trackers & Connections</h3>
+                <span class="count" id="connectionOverallCount">0</span> <!-- Overall external count -->
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="dt-section-content">
+                 <p class="dt-explanation" style="display:none;">External domains this page communicates with, including potential trackers.</p>
+                 <div class="dt-tabs"> <!-- Reusing .dt-tabs class -->
+                    <button class="dt-tab-button active" data-conn-tab="trackers">Trackers (<span id="connTrackersCount">0</span>)</button>
+                    <button class="dt-tab-button" data-conn-tab="otherExternal">Other External (<span id="connOtherExternalCount">0</span>)</button>
+                </div>
+
+                <div id="trackers" class="dt-tab-content active"> <!-- ID matches data-conn-tab -->
+                    <ul id="connectionListTrackers"></ul>
+                    <div class="dt-empty-message tab-empty" style="display:none;">No known trackers identified.</div>
+                </div>
+                <div id="otherExternal" class="dt-tab-content"> <!-- ID matches data-conn-tab -->
+                    <ul id="connectionListOtherExternal"></ul>
+                    <div class="dt-empty-message tab-empty" style="display:none;">No other external connections found.</div>
+                </div>
+                 <div class="dt-empty-message main-conn-empty" id="connectionsUnavailableMsg" style="display:none;">Connection data could not be loaded.</div>
+            </div>
+        </div>
+
+        <div class="dt-section collapsed" id="storageSection">
+            <!-- ... (storage section as before) ... -->
+             <div class="dt-section-header">
+                <h3><span class="dt-item-icon">💾</span> Site Data Storage</h3>
+                <span class="count" id="storageCount">0</span>
+                <span class="toggle-icon">▶</span>
+            </div>
+            <div class="dt-section-content">
+                 <p class="dt-explanation" style="display:none;">Data stored directly by the website in your browser (Local & Session Storage).</p>
+                <ul id="localStorageList"></ul>
+                <ul id="sessionStorageList" style="margin-top: 5px;"></ul>
+                <div class="dt-empty-message" id="storageEmptyMessage" style="display:none;">No site data found.</div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

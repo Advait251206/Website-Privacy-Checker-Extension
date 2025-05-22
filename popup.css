@@ -1,0 +1,342 @@
+/* popup.css - Digital Trust Extension */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 390px;
+  min-height: 320px;
+  padding: 0;
+  font-size: 14px;
+  color: #333;
+  background-color: #f4f6f8;
+}
+.dt-header {
+  background-color: #005A9C;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #003E6B;
+}
+.dt-header-main {
+    display: flex;
+    align-items: center;
+}
+.dt-header img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.dt-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.dt-site-url-bar {
+    font-size: 0.8em;
+    color: #555;
+    padding: 6px 15px;
+    text-align: center;
+    word-break: break-all;
+    background-color: #e9edf0;
+    border-bottom: 1px solid #dde3e7;
+}
+.dt-site-url-bar strong {
+    color: #005A9C;
+}
+.dt-score-display-area {
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.dt-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.dt-privacy-score {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1;
+    color: #333;
+    margin-bottom: 5px;
+}
+.dt-privacy-score .score-label {
+    font-size: 0.9em;
+    color: #333333;
+    margin-right: 5px;
+    font-weight: normal;
+}
+.dt-privacy-score .score-value {
+    font-size: 1.5em;
+    /* Dynamic color will be set by JS */
+}
+.dt-privacy-score .score-max {
+    font-size: 0.7em;
+    opacity: 0.7;
+    font-weight: normal;
+    color: #555;
+    margin-left: 2px;
+}
+.remark-container {
+    width: 100%;
+}
+.remark-label {
+    font-size: 0.8em;
+    color: #555;
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+.dt-score-remark {
+    font-size: 0.9em;
+    color: #000000; /* Default to black */
+    line-height: 1.3;
+    text-align: left;
+    width: 100%;
+}
+.dt-actionable-advice {
+    background-color: #f7f9fc;
+    border: 1px solid #dce4ec;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin: 10px 15px 5px 15px;
+    font-size: 0.85em;
+    color: #334155;
+}
+.dt-actionable-advice h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    color: #0284c7;
+    font-weight: 600;
+}
+.dt-actionable-advice ul {
+    list-style-type: disc;
+    padding-left: 18px;
+    margin-bottom: 0;
+}
+.dt-actionable-advice li {
+    margin-bottom: 4px;
+    line-height: 1.4;
+    border-bottom: none; /* Overrides general li style */
+    align-items: flex-start;
+    padding: 2px 0;
+    display: list-item;
+}
+.dt-actionable-advice p#maxScoreReached {
+    font-weight: 500;
+    color: #16a34a;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.dt-content-area {
+  padding: 0 15px 15px 15px;
+}
+
+.dt-loading-message, .dt-error-message:not(.tab-error), .dt-empty-message:not(.tab-empty) { /* Exclude tab specific messages from general padding */
+  text-align: center;
+  padding: 20px; /* General padding */
+  font-style: italic;
+  color: #666;
+}
+.dt-empty-message.tab-empty, .dt-error-message.tab-error  { /* Specific for tabs */
+  text-align: center;
+  padding: 10px; /* Reduced padding */
+  font-style: italic;
+  color: #777;
+  font-size: 0.85em;
+}
+
+.dt-empty-message.main-perm-empty, .dt-empty-message.main-conn-empty { /* For overall "unavailable" messages */
+    padding: 15px 10px; /* Adjusted padding */
+    color: #666;
+    font-size: 0.9em; /* Slightly larger than tab-empty */
+    text-align: center;
+}
+
+.dt-error-message { /* This is for the global error message at the top if used */
+  color: #d32f2f;
+}
+
+.dt-section {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  margin-top: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.dt-content-area > #mainContent > .dt-section:first-child {
+    margin-top: 0;
+}
+.dt-section-header {
+  padding: 8px 12px;
+  background-color: #f0f4f8;
+  border-bottom: 1px solid #d8e0e8;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dt-section-header h3 { margin: 0; font-size: 1em; font-weight: 600; color: #004C80; }
+.dt-section-header .count {
+  font-size: 0.85em; background-color: #d8e0e8; color: #333;
+  padding: 2px 5px; border-radius: 8px; font-weight: bold;
+}
+.dt-section-header .toggle-icon { font-weight: bold; transition: transform 0.2s ease-in-out; padding: 0 5px; }
+.dt-section.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+.dt-section-content {
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 0.9em;
+  transition: max-height 0.3s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+}
+.dt-section:not(.collapsed) .dt-section-content {
+    /* max-height is now section specific for tabbed content */
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+/* Specific max-height for tabbed sections when expanded */
+.dt-section:not(.collapsed)#permissionsSection .dt-section-content,
+.dt-section:not(.collapsed)#connectionsSection .dt-section-content {
+    max-height: 260px; /* Increased slightly to accommodate tabs better */
+}
+/* Non-tabbed sections */
+.dt-section:not(.collapsed)#cookiesSection .dt-section-content,
+.dt-section:not(.collapsed)#storageSection .dt-section-content {
+    max-height: 140px;
+}
+
+
+.dt-section.collapsed .dt-section-content .dt-explanation,
+.dt-section.collapsed .dt-section-content .dt-tabs,
+.dt-section.collapsed .dt-section-content .dt-tab-content {
+    display: none !important; /* Stronger rule to hide when section is collapsed */
+}
+.dt-section:not(.collapsed) .dt-section-content .dt-explanation {
+    display: block;
+}
+
+
+/* --- Tabs (generic styling, used by Permissions and Connections) --- */
+.dt-tabs {
+    display: flex;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+.dt-tab-button {
+    flex-grow: 1;
+    padding: 8px 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    margin-right: -1px; /* Overlap borders for seamless look */
+    font-size: 0.8em; /* Slightly smaller for tab buttons */
+    color: #333;
+    outline: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dt-tab-button:first-child { border-top-left-radius: 4px; }
+.dt-tab-button:last-child { border-top-right-radius: 4px; margin-right: 0; }
+
+.dt-tab-button.active {
+    background-color: #ffffff; /* Active tab background matches content area */
+    border-bottom: 1px solid #ffffff; /* "Merge" with content area by hiding bottom border */
+    color: #005A9C; /* Theme color for active tab text */
+    font-weight: bold;
+}
+.dt-tab-button:not(.active):hover {
+    background-color: #e7e7e7;
+}
+.dt-tab-button .count { /* Styling for counts inside tab buttons */
+    font-weight: normal;
+    color: #555;
+}
+.dt-tab-button.active .count {
+    color: #005A9C;
+    font-weight: bold;
+}
+
+.dt-tab-content {
+    display: none; /* Hidden by default */
+    padding-top: 8px; /* Space above the list in a tab */
+    /* max-height controlled by parent .dt-section-content when expanded */
+    overflow-y: auto; /* Scroll individual tab content if it exceeds section's content height */
+}
+.dt-tab-content.active {
+    display: block; /* Show active tab content */
+}
+.dt-tab-content ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+/* List items specifically within tabs (e.g., permissions, connections tabs) */
+.dt-tab-content li {
+    padding: 4px 2px; /* Slightly reduced horizontal padding for tab list items */
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    align-items: center;
+}
+.dt-tab-content li:last-child { border-bottom: none; }
+
+
+/* General list item styling (for non-tabbed sections like Cookies, Storage) */
+.dt-section-content > ul:not(#permissionListAllowed):not(#permissionListAsk):not(#permissionListBlocked):not(#connectionListTrackers):not(#connectionListOtherExternal):not(#adviceList) {
+    /* Ensures these styles don't over-apply to tabbed or advice lists */
+}
+.dt-section-content > ul > li { /* More specific selector for general list items */
+    padding: 4px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    align-items: center;
+}
+.dt-section-content > ul > li:last-child { border-bottom: none; }
+
+
+.dt-item-icon { margin-right: 8px; font-size: 1.1em; width: 20px; text-align: center; flex-shrink: 0; }
+.dt-item-name { font-weight: 500; color: #222; flex-shrink: 0; margin-right: 5px;}
+.dt-item-detail { color: #555; font-size: 0.9em; word-break: break-all; flex-grow: 1; line-height: 1.3; }
+.dt-item-value { color: #555; margin-left: auto; padding-left: 10px; font-size: 0.9em; white-space: nowrap; flex-shrink: 0; }
+.dt-text-third-party, .dt-text-tracker, .dt-text-external {
+  font-weight: bold; font-size: 0.85em; padding: 1px 4px; border-radius: 3px; margin-left: 3px; display: inline-block;
+}
+.dt-text-third-party { color: #9B2C2C; background-color: #FED7D7; }
+.dt-text-tracker { color: #B83280; background-color: #FAE8F3; }
+.dt-text-external { color: #2D5C8C; background-color: #D4E4F3; }
+.dt-permission-item .status-granted { color: #287D3C; font-weight: bold;}
+.dt-permission-item .status-denied { color: #C23A2C; font-weight: bold;}
+.dt-permission-item .status-prompt { color: #D97706; font-weight: bold;}
+.dt-permission-item .status-unavailable,
+.dt-permission-item .status-query_failed,
+.dt-permission-item .status-unknown,
+.dt-permission-item .status-error { color: #757575; }
+.dt-tooltip { position: relative; display: inline-flex; align-items: center; cursor: help; margin-left: 4px; }
+.dt-tooltip .dt-tooltiptext {
+    visibility: hidden; width: 220px; background-color: #4A5568; color: #fff; text-align: left;
+    border-radius: 4px; padding: 8px 10px; position: absolute; z-index: 10; bottom: 125%;
+    left: 50%; margin-left: -110px; opacity: 0; transition: opacity 0.3s; font-size: 0.85em;
+    font-weight: normal; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.dt-tooltip:hover .dt-tooltiptext { visibility: visible; opacity: 1; }
+.dt-explanation {
+    font-size: 0.85em; color: #4A5568; margin: 5px 0 8px 0; padding: 5px 8px;
+    border-left: 3px solid #005A9C; background-color: #eef3f7; border-radius: 0 3px 3px 0;
+}
