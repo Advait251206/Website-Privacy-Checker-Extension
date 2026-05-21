@@ -1,0 +1,27 @@
+# OS system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE config files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Extension build leftovers or ZIP files
+*.zip
+*.crx
+*.pem
+
+# Local node (if any test modules used)
+node_modules/
+package-lock.json
+
+# Antigravity/Agent planning artifacts
+.agent/
+.planning/
+.gemini/
